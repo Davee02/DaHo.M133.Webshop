@@ -1,3 +1,5 @@
+const CopyPlugin = require('copy-webpack-plugin');
+
 module.exports = {
     mode: "development",
 
@@ -19,6 +21,12 @@ module.exports = {
         // Add '.ts' and '.tsx' as resolvable extensions.
         extensions: [".ts", ".tsx", ".js"]
     },
+
+    plugins: [
+        new CopyPlugin([
+            { from: "public/img", to: "img" }
+        ])
+    ],
 
     module: {
         rules: [
