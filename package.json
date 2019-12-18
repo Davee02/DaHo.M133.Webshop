@@ -2,19 +2,21 @@
   "name": "DaHo.M133.Webshop",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:backend": "tsc",
     "build:frontend": "webpack",
-    "start": "node ./dist/main.js"
+    "watch:frontend": "webpack --watch",
+    "start-express": "node ./dist/main.js",
+    "start": "run-p build:backend watch:frontend start-express"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Davee02/DaHo.M133.Webshop.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "David Hodel",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Davee02/DaHo.M133.Webshop/issues"
@@ -36,6 +38,7 @@
   "dependencies": {
     "ejs": "^3.0.1",
     "express": "^4.17.1",
+    "npm-run-all": "^4.1.5",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   }
