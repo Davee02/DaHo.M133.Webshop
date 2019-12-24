@@ -5,12 +5,12 @@ export interface ProductOverviewProps {
   product: Product;
 }
 
-export interface ProductOverviewState {}
+export interface ProductOverviewState { }
 
 export default class App extends React.Component<
   ProductOverviewProps,
   ProductOverviewState
-> {
+  > {
   constructor(props: ProductOverviewProps) {
     super(props);
   }
@@ -25,10 +25,7 @@ export default class App extends React.Component<
           height={250}
         />
         <p>{product.productName}</p>
-        <p>{product.specialOffer}</p>
-        <p>
-          <s>{product.specialOffer}</s>
-        </p>
+        <p>{product.specialOffer} <s>{product.normalPrice}</s></p>
       </section>
     );
   }

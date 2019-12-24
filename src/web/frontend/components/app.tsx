@@ -2,10 +2,28 @@ import React from "react";
 import ProductOverview from "./productOverview";
 import Product from "../../../lib/product";
 
-export default class App extends React.Component {
-  render() {
-    let product = new Product(1, "Eggs", 12.3, 15.5, "eier.jpg", "Sehr gute Eier");
+export interface AppProps {
+}
 
-    return <ProductOverview product={product} />;
+export interface AppState {
+  products: Product[];
+}
+
+export default class App extends React.Component<AppProps, AppState> {
+  constructor(props: AppProps) {
+    super(props);
+    this.state = { products: new Array<Product>() }
+  }
+
+  componentDidMount() {
+    fetch("/api/product/list")
+      .then(response => response.json())
+      .then(products => { this.setState({ products }) });
+  }
+
+  render() {
+    const productComponents = this.state.products.map(x => <ProductOverview product={x} key={x.id} />);
+
+    return productComponents;
   }
 }

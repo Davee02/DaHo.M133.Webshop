@@ -1,5 +1,5 @@
 {
-  "name": "DaHo.M133.Webshop",
+  "name": "daho-m133-webshop",
   "version": "1.0.0",
   "description": "",
   "main": "main.ts",
@@ -9,7 +9,7 @@
     "build:frontend": "webpack",
     "watch:frontend": "webpack --watch",
     "start-express": "node ./dist/main.js",
-    "start": "run-p build:backend watch:frontend start-express"
+    "start": "npm run build:backend && run-p watch:frontend start-express"
   },
   "repository": {
     "type": "git",
