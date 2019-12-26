@@ -27,15 +27,13 @@ export default class App extends React.Component<AppProps, AppState> {
     const productComponents = this.state.products.map(x => <ProductOverview product={x} key={x.id} />);
 
     return (
-      <main>
-        <Switch>
-          <Route path="/product/:id" >
-            <ProductDetail />
-          </Route>
-          <Route path="/" exact>
-            {productComponents}
-          </Route>
-        </Switch>
-      </main>);
+      <Switch>
+        <Route path="/product/:id" >
+          <ProductDetail />
+        </Route>
+        <Route path="/" exact>
+          {productComponents}
+        </Route>
+      </Switch>);
   }
 }
