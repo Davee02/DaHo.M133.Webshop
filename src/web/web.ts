@@ -8,15 +8,12 @@ const app = express();
 
 app.use("/assets", express.static(path.join(__dirname, "frontend")));
 
-app.set("view engine", "ejs");
-app.set("views", "public");
-
 app.get("/api/product/list", (req, res) => {
     res.json(products);
 })
 
-app.get("/*", (req, res) => {
-    res.render("index");
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "index.html"));
 })
 
 
