@@ -21,4 +21,8 @@ export default class Product {
     this.imageName = imageName;
     this.description = description;
   }
+
+  static Dummy(): Product {
+    return new Product(0, "Dummy", 0, 0, "Dummy", "Dummy");
+  } ;
 }

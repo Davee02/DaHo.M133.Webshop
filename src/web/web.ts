@@ -12,6 +12,11 @@ app.get("/api/product/list", (req, res) => {
     res.json(products);
 })
 
+app.get("/api/product/:id", (req, res) => {
+    const product = products.filter(x => Number(x.id) === Number(req.params.id))
+    res.json(product[0]);
+})
+
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend", "index.html"));
 })

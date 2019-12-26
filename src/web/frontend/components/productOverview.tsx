@@ -1,5 +1,7 @@
 import React from "react";
 import Product from "../../../lib/product";
+import { Link } from "react-router-dom";
+import ProductImage from "./ProductImage";
 
 export interface ProductOverviewProps {
   product: Product;
@@ -19,11 +21,9 @@ export default class App extends React.Component<
     let product = this.props.product;
     return (
       <section>
-        <img
-          src={`/assets/img/${product.imageName}`}
-          alt={product.productName}
-          height={250}
-        />
+        <Link to={`/product/${product.id}`}>
+          <ProductImage product={product} imageHeight={250} />
+        </Link>
         <p>{product.productName}</p>
         <p>{product.specialOffer} <s>{product.normalPrice}</s></p>
       </section>
