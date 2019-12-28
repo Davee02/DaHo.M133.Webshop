@@ -18,7 +18,7 @@ class ProductDetail extends React.Component<ProductDetailProps, ProductDetailSta
   constructor(props: ProductDetailProps) {
     super(props);
 
-    this.state = { product: Product.Dummy() };
+    this.state = { product: new Product(0, "Loading", 0, 0, "loading.jpg", "Loading") };
     this.handleAddToCartClick = this.handleAddToCartClick.bind(this);
   }
 
