@@ -8,7 +8,6 @@ export interface ProductDetailRouterProps {
 }
 
 export interface ProductDetailProps extends RouteComponentProps<ProductDetailRouterProps> {
-
 }
 
 export interface ProductDetailState {
@@ -20,7 +19,7 @@ class ProductDetail extends React.Component<ProductDetailProps, ProductDetailSta
     super(props);
 
     this.state = { product: Product.Dummy() };
-    this.addToCartClicked = this.addToCartClicked.bind(this);
+    this.handleAddToCartClick = this.handleAddToCartClick.bind(this);
   }
 
   componentDidMount() {
@@ -29,8 +28,8 @@ class ProductDetail extends React.Component<ProductDetailProps, ProductDetailSta
       .then(product => { this.setState({ product }) });
   }
 
-  addToCartClicked() {
-
+  handleAddToCartClick() {
+    fetch(`/api/shoppingcart/add/${this.props.match.params.id}`, { method: "PUT" });
   }
 
   render() {
@@ -40,7 +39,7 @@ class ProductDetail extends React.Component<ProductDetailProps, ProductDetailSta
         <ProductImage product={product} imageHeight={500} />
         <h3>{product.productName}</h3>
         <p>{product.description}</p>
-        <button onClick={this.addToCartClicked}>Add to shopping cart</button>
+        <button onClick={this.handleAddToCartClick}>Add to shopping cart</button>
       </section>
     );
   }

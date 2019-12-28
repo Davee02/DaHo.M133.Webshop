@@ -3,6 +3,8 @@ import ProductOverview from "./ProductOverview";
 import Product from "../../../lib/product";
 import { Switch, Route } from "react-router-dom";
 import ProductDetail from "./productDetail";
+import ShoppingCart from "./ShoppingCart";
+import Header from "./Header";
 
 export interface AppProps {
 }
@@ -24,16 +26,22 @@ export default class App extends React.Component<AppProps, AppState> {
   }
 
   render() {
-    const productComponents = this.state.products.map(x => <ProductOverview product={x} key={x.id} />);
-
     return (
-      <Switch>
-        <Route path="/product/:id" >
-          <ProductDetail />
-        </Route>
-        <Route path="/" exact>
-          {productComponents}
-        </Route>
-      </Switch>);
+      <div>
+        <Header />
+        <main>
+          <Switch>
+            <Route path="/product/:id" >
+              <ProductDetail />
+            </Route>
+            <Route path="/shoppingcart" >
+              <ShoppingCart />
+            </Route>
+            <Route path="/" exact>
+              {this.state.products.map(x => <ProductOverview product={x} key={x.id} />)}
+            </Route>
+          </Switch>
+        </main>
+      </div>);
   }
 }
