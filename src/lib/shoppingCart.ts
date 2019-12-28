@@ -11,7 +11,7 @@ export default class ShoppingCart {
         let price = 0;
 
         this.allProducts.forEach(product => {
-            price += product.specialOffer;
+            price += product.specialOffer || product.normalPrice;
         });
 
         return price;

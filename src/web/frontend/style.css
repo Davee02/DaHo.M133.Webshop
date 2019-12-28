@@ -1,9 +1,36 @@
-.App {
-    margin: 30px auto;
-    max-width: 320px;
-    padding: 2em;
-    border: 1px solid silver;
-    border-radius: 1em;
+div#root {
+    margin: 20px;
+}
 
-    text-align: center;
+header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+.overview-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.overview-item {
+    margin: 25px;
+}
+
+img.overview {
+    height: 250px;
+}
+
+.detail-container {
+    display: flex;
+}
+
+img.detail {
+    height: 400px;
+    margin-right: 20px;
+}
+
+.minishoppingcart-container {
+    display: flex;
+    align-items: center;
 }

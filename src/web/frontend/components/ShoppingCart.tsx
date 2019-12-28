@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 
 export interface ShoppingCartProps {}
 
@@ -10,6 +11,6 @@ export default class ShoppingCart extends React.Component<ShoppingCartProps, Sho
   }
 
   render() {
-      return "";
+      return <Link to="/checkout">Checkout</Link>;
   }
 }

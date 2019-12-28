@@ -21,7 +21,7 @@ app.get("/api/product/list", (req, res) => {
 });
 
 app.get("/api/product/:id", (req, res) => {
-    const product = products.find(x => Number(x.id) === Number(req.params.id));
+    const product = products.find(x => x.id === Number(req.params.id));
 
     if (product) {
         res.json(product);
@@ -40,7 +40,11 @@ app.get("/api/shoppingcart", (req, res) => {
 });
 
 app.put("/api/shoppingcart/add/:id", (req, res) => {
-    const product = products.find(x => Number(x.id) === Number(req.params.id));
+    const product = products.find(x => x.id === Number(req.params.id));
+
+    if(!product) {
+        res.sendStatus(400);
+    }
 
     if (!req.session!.shoppingcart) {
         req.session!.shoppingcart = new ShoppingCart();

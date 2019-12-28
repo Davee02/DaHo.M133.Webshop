@@ -17,28 +17,29 @@ export default class MiniShoppingCart extends React.Component<MiniShoppingCartPr
         this.state = { totalPrice: 0 };
     }
 
-    
-    componentDidUpdate() {
+
+    componentDidUpdate(prevProps: MiniShoppingCartProps, prevState: MiniShoppingCartState) {
         fetch("/api/shoppingcart")
             .then(response => response.json())
             .then(shoppingcart => {
                 let cart = (shoppingcart as ShoppingCart);
                 cart.getTotalPrice = new ShoppingCart().getTotalPrice;
+                let totalPrice = cart.getTotalPrice();
 
-                this.setState({ totalPrice: cart.getTotalPrice() });
+                if (totalPrice !== prevState.totalPrice) {
+                    this.setState({ totalPrice: totalPrice });
+                }
             });
     }
 
     render() {
         return (
-            <Link to="/shoppingcart">
-                <p>
-                    CHF {this.state.totalPrice.toFixed(2)}
-                    <img
-                        src={`/assets/img/shoppingcart.png`}
-                        alt="Shopping cart"
-                        height={30} />
-                </p>
+            <Link to="/shoppingcart" className="minishoppingcart-container">
+                <img
+                    src={`/assets/img/shoppingcart.png`}
+                    alt="Shopping cart"
+                    height={30} />
+                <p>CHF {this.state.totalPrice.toFixed(2)}</p>
             </Link>
         );
     }

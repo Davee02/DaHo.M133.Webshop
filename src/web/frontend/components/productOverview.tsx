@@ -20,13 +20,18 @@ export default class App extends React.Component<
   render() {
     let product = this.props.product;
     return (
-      <section>
+      <div className="overview-item">
         <Link to={`/product/${product.id}`}>
-          <ProductImage product={product} imageHeight={250} />
+          <ProductImage product={product} className="overview" />
         </Link>
-        <p>{product.productName}</p>
-        <p>{product.specialOffer} <s>{product.normalPrice}</s></p>
-      </section>
+        <p><b>{product.productName}</b></p>
+        {
+          product.specialOffer
+            ? <p>CHF {product.specialOffer.toFixed(2)} <s>CHF {product.normalPrice.toFixed(2)}</s></p>
+            : <p>CHF {product.normalPrice.toFixed(2)}</p>
+        }
+
+      </div>
     );
   }
 }

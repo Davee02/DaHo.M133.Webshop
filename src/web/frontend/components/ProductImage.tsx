@@ -3,7 +3,7 @@ import Product from "../../../lib/product";
 
 export interface ProductImageProps {
     product: Product;
-    imageHeight: number;
+    className?: string;
 }
 
 export interface ProductImageState { }
@@ -19,7 +19,7 @@ export default class ProductImage extends React.Component<ProductImageProps, Pro
         return <img
             src={`/assets/img/${product.imageName}`}
             alt={product.productName}
-            height={this.props.imageHeight}
+            className={this.props.className}
         />;
     }
 }

@@ -5,6 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import ProductDetail from "./productDetail";
 import ShoppingCart from "./ShoppingCart";
 import Header from "./Header";
+import Checkout from "./Checkout";
 
 export interface AppProps {
 }
@@ -32,13 +33,18 @@ export default class App extends React.Component<AppProps, AppState> {
         <main>
           <Switch>
             <Route path="/product/:id" >
-              <ProductDetail />
+              <ProductDetail onCartUpdate={() => {this.forceUpdate()}}/>
             </Route>
             <Route path="/shoppingcart" >
               <ShoppingCart />
             </Route>
+            <Route path="/checkout">
+              <Checkout />
+            </Route>
             <Route path="/" exact>
-              {this.state.products.map(x => <ProductOverview product={x} key={x.id} />)}
+              <div className="overview-container">
+                {this.state.products.map(x => <ProductOverview product={x} key={x.id} />)}
+              </div>
             </Route>
           </Switch>
         </main>
