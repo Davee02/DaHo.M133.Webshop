@@ -12,14 +12,14 @@ export interface ProductDetailProps extends RouteComponentProps<ProductDetailRou
 }
 
 export interface ProductDetailState {
-  product: Product;
+  product?: Product;
 }
 
 class ProductDetail extends React.Component<ProductDetailProps, ProductDetailState> {
   constructor(props: ProductDetailProps) {
     super(props);
 
-    this.state = { product: new Product(0, "Loading...", 0, 0, "loading.jpg", "Loading...") };
+    this.state = { product: undefined }
     this.handleAddToCartClick = this.handleAddToCartClick.bind(this);
   }
 
@@ -36,16 +36,20 @@ class ProductDetail extends React.Component<ProductDetailProps, ProductDetailSta
 
   render() {
     let product = this.state.product;
-    return (
-      <div className="detail-container">
-        <ProductImage product={product} className="detail" />
-        <div>
-          <h2>{product.productName}</h2>
-          <p>{product.description}</p>
-          <button onClick={this.handleAddToCartClick}>Add to shopping cart</button>
+    if (product) {
+      return (
+        <div className="detail-container">
+          <ProductImage product={product} className="detail" />
+          <div>
+            <h2>{product.productName}</h2>
+            <p>{product.description}</p>
+            <button onClick={this.handleAddToCartClick}>Add to shopping cart</button>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+
+    return null;
   }
 }
 

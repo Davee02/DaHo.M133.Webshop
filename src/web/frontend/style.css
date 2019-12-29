@@ -34,3 +34,17 @@ img.detail {
     display: flex;
     align-items: center;
 }
+
+form > div > label {
+    display: inline-block;
+    width: 150px;
+    margin-bottom: 10px;
+}
+
+form > div > input {
+    width: 200px;
+}
+
+input[type=submit] {
+    margin-top: 20px;
+}
