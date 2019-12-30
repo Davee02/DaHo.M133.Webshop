@@ -1,12 +1,12 @@
 import * as React from "react";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
-export interface CheckoutProps { }
+export interface CheckoutProps extends RouteComponentProps { }
 
 export interface CheckoutState {
-
 }
 
-export default class Checkout extends React.Component<CheckoutProps, CheckoutState> {
+class Checkout extends React.Component<CheckoutProps, CheckoutState> {
   constructor(props: CheckoutProps) {
     super(props);
 
@@ -18,13 +18,25 @@ export default class Checkout extends React.Component<CheckoutProps, CheckoutSta
     const target = event.target;
     const name = target.name;
 
-    this.setState({
-      [name]: target.value
-    });
+    this.setState({ [name]: target.value });
   }
 
   handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    
+    fetch("/api/checkout", {
+      method: "POST",
+      body: JSON.stringify(this.state),
+      headers: { "Content-Type": "application/json" }
+    })
+      .then(response => {
+        if (!response.ok) {
+          alert("There was an error while processing your checkout. Maybe you used invalid data.");
+
+        } else {
+          alert("Your checkout was made.");
+        };
+      });
   }
 
   render() {
@@ -55,3 +67,6 @@ export default class Checkout extends React.Component<CheckoutProps, CheckoutSta
     );
   }
 }
+
+
+export default withRouter(Checkout)
