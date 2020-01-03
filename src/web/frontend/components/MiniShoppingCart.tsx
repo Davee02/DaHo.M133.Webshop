@@ -34,7 +34,7 @@ export default class MiniShoppingCart extends React.Component<MiniShoppingCartPr
 
     render() {
         return (
-            <Link to="/shoppingcart" className="minishoppingcart-container">
+            <Link to="/shoppingcart" className="minishoppingcart-container no-link">
                 <img
                     src={`/assets/img/shoppingcart.png`}
                     alt="Shopping cart"

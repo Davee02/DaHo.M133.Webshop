@@ -1,15 +1,17 @@
 import * as React from "react";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import { withRouter, RouteComponentProps, Redirect } from "react-router-dom";
 
 export interface CheckoutProps extends RouteComponentProps { }
 
 export interface CheckoutState {
+  checkoutIsFinished: boolean;
 }
 
 class Checkout extends React.Component<CheckoutProps, CheckoutState> {
   constructor(props: CheckoutProps) {
     super(props);
 
+    this.state = { checkoutIsFinished: false };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -18,28 +20,32 @@ class Checkout extends React.Component<CheckoutProps, CheckoutState> {
     const target = event.target;
     const name = target.name;
 
-    this.setState({ [name]: target.value });
+    this.setState(state => ({ [name]: target.value, checkoutIsFinished: state.checkoutIsFinished }));
   }
 
   handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    
+
     fetch("/api/checkout", {
       method: "POST",
       body: JSON.stringify(this.state),
       headers: { "Content-Type": "application/json" }
     })
       .then(response => {
-        if (!response.ok) {
-          alert("There was an error while processing your checkout. Maybe you used invalid data.");
-
-        } else {
+        if (response.ok) {
           alert("Your checkout was made.");
+          this.setState({checkoutIsFinished: true});
+        } else {
+          alert("There was an error while processing your checkout. Maybe you used invalid data.");
         };
       });
   }
 
   render() {
+    if(this.state.checkoutIsFinished) {
+      return <Redirect to="/"/>
+    }
+    
     return (
       <form onSubmit={this.handleSubmit} className="checkout">
         <div>
