@@ -35,13 +35,13 @@ img.detail {
   align-items: center;
 }
 
-form > div > label {
+form label {
   display: inline-block;
   width: 150px;
   margin-bottom: 10px;
 }
 
-form > div > input {
+form input {
   width: 200px;
 }
 
@@ -52,4 +52,20 @@ input[type="submit"] {
 a.no-link {
   color: inherit;
   text-decoration: none;
+}
+
+table.shoppingcart {
+  width: 80%;
+}
+
+table.shoppingcart th {
+  text-align: left;
+}
+
+table.shoppingcart tfoot {
+  font-weight: bold;
+}
+
+table.shoppingcart button {
+  margin: 5px;
 }

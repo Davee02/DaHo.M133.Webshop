@@ -2,12 +2,14 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import ShoppingCartLib from "../../../lib/shoppingCart";
 import ProductRow from "./ProductRow";
-import Product from "../../../lib/product";
 
-export interface ShoppingCartProps {}
+export interface ShoppingCartProps {
+  onCartUpdate: () => void;
+}
 
 export interface ShoppingCartState {
   shoppingCart: ShoppingCartLib;
+  totalPrice: number;
 }
 
 export default class ShoppingCart extends React.Component<
@@ -17,10 +19,24 @@ export default class ShoppingCart extends React.Component<
   constructor(props: ShoppingCartProps) {
     super(props);
 
-    this.state = { shoppingCart: new ShoppingCartLib() };
+    this.onCartUpdate = this.onCartUpdate.bind(this);
+    this.state = { shoppingCart: new ShoppingCartLib(), totalPrice: 0 };
   }
 
   componentDidMount() {
+    this.onCartUpdate();
+  }
+
+  onCartUpdate() {
+    fetch("/api/shoppingcart/price")
+      .then(response => response.json())
+      .then(price => {
+        if (price !== this.state.totalPrice) {
+          this.props.onCartUpdate();
+          this.setState({ totalPrice: price });
+        }
+      });
+
     fetch("/api/shoppingcart")
       .then(response => response.json())
       .then(shoppingcart => {
@@ -61,13 +77,14 @@ export default class ShoppingCart extends React.Component<
         <ProductRow
           product={products[0]}
           productCount={products.length}
+          onCartUpdate={() => this.onCartUpdate()}
           key={products[0].id}
         />
       )
     );
 
     let productTable = (
-      <table>
+      <table className="shoppingcart">
         <thead>
           <tr>
             <th>Product</th>
@@ -82,7 +99,7 @@ export default class ShoppingCart extends React.Component<
             <td />
             <td />
             <td />
-            <td>100</td>
+            <td>CHF {this.state.totalPrice.toFixed(2)}</td>
           </tr>
         </tfoot>
       </table>

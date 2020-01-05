@@ -16,10 +16,16 @@ export interface AppState {
 export default class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
+
+    this.onCartUpdate = this.onCartUpdate.bind(this);
     this.state = { products: new Array<Product>() };
   }
 
   componentDidMount() {
+    this.onCartUpdate();
+  }
+
+  onCartUpdate() {
     fetch("/api/product/list")
       .then(response => response.json())
       .then(products => {
@@ -36,12 +42,16 @@ export default class App extends React.Component<AppProps, AppState> {
             <Route path="/product/:id">
               <ProductDetail
                 onCartUpdate={() => {
-                  this.forceUpdate();
+                  this.onCartUpdate();
                 }}
               />
             </Route>
             <Route path="/shoppingcart">
-              <ShoppingCart />
+              <ShoppingCart
+                onCartUpdate={() => {
+                  this.onCartUpdate();
+                }}
+              />
             </Route>
             <Route path="/checkout">
               <Checkout />

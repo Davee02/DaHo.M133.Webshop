@@ -42,6 +42,17 @@ app.get("/api/shoppingcart", (req, res) => {
   res.send(req.session!.shoppingcart);
 });
 
+app.get("/api/shoppingcart/price", (req, res) => {
+  if (!req.session!.shoppingcart) {
+    req.session!.shoppingcart = new ShoppingCart();
+  }
+
+  let cart = req.session!.shoppingcart;
+  cart.getTotalPrice = new ShoppingCart().getTotalPrice;
+
+  res.send(cart.getTotalPrice() + "");
+});
+
 app.put("/api/shoppingcart/add/:id", (req, res) => {
   const product = products.find(x => x.id === Number(req.params.id));
 
@@ -56,6 +67,27 @@ app.put("/api/shoppingcart/add/:id", (req, res) => {
 
   let shoppingcart = req.session!.shoppingcart as ShoppingCart;
   shoppingcart.allProducts = [...shoppingcart.allProducts, product!];
+
+  res.sendStatus(200);
+});
+
+app.put("/api/shoppingcart/remove/:id", (req, res) => {
+  const product = products.find(x => x.id === Number(req.params.id));
+
+  if (!product) {
+    res.sendStatus(400);
+    return;
+  }
+
+  if (!req.session!.shoppingcart) {
+    req.session!.shoppingcart = new ShoppingCart();
+  }
+
+  let shoppingcart = req.session!.shoppingcart as ShoppingCart;
+  shoppingcart.allProducts.splice(
+    shoppingcart.allProducts.findIndex(p => p.id === product.id),
+    1
+  );
 
   res.sendStatus(200);
 });

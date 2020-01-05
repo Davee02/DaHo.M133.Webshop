@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import ShoppingCart from "../../../lib/shoppingCart";
 
 export interface MiniShoppingCartProps {}
 
@@ -22,15 +21,11 @@ export default class MiniShoppingCart extends React.Component<
     prevProps: MiniShoppingCartProps,
     prevState: MiniShoppingCartState
   ) {
-    fetch("/api/shoppingcart")
+    fetch("/api/shoppingcart/price")
       .then(response => response.json())
-      .then(shoppingcart => {
-        let cart = shoppingcart as ShoppingCart;
-        cart.getTotalPrice = new ShoppingCart().getTotalPrice;
-        let totalPrice = cart.getTotalPrice();
-
-        if (totalPrice !== prevState.totalPrice) {
-          this.setState({ totalPrice: totalPrice });
+      .then(price => {
+        if (price !== prevState.totalPrice) {
+          this.setState({ totalPrice: price });
         }
       });
   }
