@@ -1,19 +1,19 @@
 import Product from "./product";
 
 export default class ShoppingCart {
-    allProducts: Product[];
+  allProducts: Product[];
 
-    constructor() {
-        this.allProducts = new Array<Product>();
-    }
+  constructor() {
+    this.allProducts = new Array<Product>();
+  }
 
-    getTotalPrice(): number {
-        let price = 0;
+  getTotalPrice(): number {
+    let price = 0;
 
-        this.allProducts.forEach(product => {
-            price += product.specialOffer || product.normalPrice;
-        });
+    this.allProducts.forEach(product => {
+      price += product.specialOffer || product.normalPrice;
+    });
 
-        return price;
-    }
+    return price;
+  }
 }

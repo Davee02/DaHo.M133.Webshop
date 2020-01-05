@@ -7,7 +7,8 @@ export interface ProductDetailRouterProps {
   id: string;
 }
 
-export interface ProductDetailProps extends RouteComponentProps<ProductDetailRouterProps> {
+export interface ProductDetailProps
+  extends RouteComponentProps<ProductDetailRouterProps> {
   onCartUpdate: () => void;
 }
 
@@ -15,23 +16,29 @@ export interface ProductDetailState {
   product?: Product;
 }
 
-class ProductDetail extends React.Component<ProductDetailProps, ProductDetailState> {
+class ProductDetail extends React.Component<
+  ProductDetailProps,
+  ProductDetailState
+> {
   constructor(props: ProductDetailProps) {
     super(props);
 
-    this.state = { product: undefined }
+    this.state = { product: undefined };
     this.handleAddToCartClick = this.handleAddToCartClick.bind(this);
   }
 
   componentDidMount() {
     fetch(`/api/product/${this.props.match.params.id}`)
       .then(response => response.json())
-      .then(product => { this.setState({ product }) });
+      .then(product => {
+        this.setState({ product });
+      });
   }
 
   handleAddToCartClick() {
-    fetch(`/api/shoppingcart/add/${this.props.match.params.id}`, { method: "PUT" })
-      .then(_ => this.props.onCartUpdate());
+    fetch(`/api/shoppingcart/add/${this.props.match.params.id}`, {
+      method: "PUT"
+    }).then(_ => this.props.onCartUpdate());
   }
 
   render() {
@@ -43,7 +50,9 @@ class ProductDetail extends React.Component<ProductDetailProps, ProductDetailSta
           <div>
             <h2>{product.productName}</h2>
             <p>{product.description}</p>
-            <button onClick={this.handleAddToCartClick}>Add to shopping cart</button>
+            <button onClick={this.handleAddToCartClick}>
+              Add to shopping cart
+            </button>
           </div>
         </div>
       );
@@ -53,4 +62,4 @@ class ProductDetail extends React.Component<ProductDetailProps, ProductDetailSta
   }
 }
 
-export default withRouter(ProductDetail)
+export default withRouter(ProductDetail);
