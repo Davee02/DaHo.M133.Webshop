@@ -1,7 +1,9 @@
 import * as React from "react";
 import { withRouter, RouteComponentProps, Redirect } from "react-router-dom";
 
-export interface CheckoutProps extends RouteComponentProps {}
+export interface CheckoutProps extends RouteComponentProps {
+  onSuccessfulCheckout: () => void;
+}
 
 export interface CheckoutState {
   checkoutIsFinished: boolean;
@@ -37,6 +39,7 @@ class Checkout extends React.Component<CheckoutProps, CheckoutState> {
       if (response.ok) {
         alert("Your checkout was made.");
         this.setState({ checkoutIsFinished: true });
+        this.props.onSuccessfulCheckout();
       } else {
         alert(
           "There was an error while processing your checkout. Maybe you used invalid data."

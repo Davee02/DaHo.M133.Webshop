@@ -67,10 +67,11 @@ export default class ShoppingCart extends React.Component<
       return null;
     }
 
-    const groupedProducts = this.groupBy(
-      this.state.shoppingCart.allProducts,
-      product => product.id
+    const sortedProducts = this.state.shoppingCart.allProducts.sort((a, b) =>
+      a.id > b.id ? 1 : -1
     );
+
+    const groupedProducts = this.groupBy(sortedProducts, product => product.id);
     const productsRows = new Array<JSX.Element>();
     groupedProducts.forEach(products =>
       productsRows.push(

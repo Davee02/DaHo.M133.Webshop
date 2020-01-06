@@ -54,7 +54,7 @@ export default class App extends React.Component<AppProps, AppState> {
               />
             </Route>
             <Route path="/checkout">
-              <Checkout />
+              <Checkout onSuccessfulCheckout={() => this.onCartUpdate()} />
             </Route>
             <Route path="/" exact>
               <div className="overview-container">
