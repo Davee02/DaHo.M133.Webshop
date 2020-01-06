@@ -23,10 +23,11 @@ img.overview {
 
 .detail-container {
   display: flex;
+  flex-wrap: wrap;
 }
 
 img.detail {
-  height: 400px;
+  height: 350px;
   margin-right: 20px;
 }
 
@@ -55,11 +56,29 @@ a.no-link {
 }
 
 table.shoppingcart {
-  width: 80%;
+  width: 70%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+table.shoppingcart tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table.shoppingcart tr:hover {
+  background-color: #ddd;
+}
+
+table.shoppingcart th, table.shoppingcart td {
+  border: 1px solid #ddd;
+  padding: 4px;
 }
 
 table.shoppingcart th {
-  text-align: left;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: rgb(133, 127, 127);
+  color: white;
 }
 
 table.shoppingcart tfoot {
@@ -67,5 +86,6 @@ table.shoppingcart tfoot {
 }
 
 table.shoppingcart button {
-  margin: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
