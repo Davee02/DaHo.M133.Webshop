@@ -2,6 +2,7 @@ import * as React from "react";
 import Product from "../../../lib/product";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import ProductImage from "./ProductImage";
+import FadeLoader from "react-spinners/FadeLoader";
 
 export interface ProductDetailRouterProps {
   id: string;
@@ -58,7 +59,7 @@ class ProductDetail extends React.Component<
       );
     }
 
-    return null;
+    return <FadeLoader loading={true} />;
   }
 }
 

@@ -64,7 +64,7 @@ export default class ShoppingCart extends React.Component<
 
   render() {
     if (this.state.shoppingCart.allProducts.length === 0) {
-      return null;
+      return <h3>Your shopping cart is empty.</h3>;
     }
 
     const sortedProducts = this.state.shoppingCart.allProducts.sort((a, b) =>
