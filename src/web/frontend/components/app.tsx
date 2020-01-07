@@ -37,6 +37,7 @@ export default class App extends React.Component<AppProps, AppState> {
     return (
       <div>
         <Header />
+        <hr/>
         <main>
           <Switch>
             <Route path="/product/:id">

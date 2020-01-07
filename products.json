@@ -40,7 +40,6 @@
     {
         "id": 6,
         "productName": "Krustenkranz",
-        "specialOffer": 2,
         "normalPrice": 2.3,
         "imageName": "krustenkranz.jpg",
         "description": "Terra Suisse"

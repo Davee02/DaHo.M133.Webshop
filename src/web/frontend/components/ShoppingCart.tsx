@@ -109,7 +109,7 @@ export default class ShoppingCart extends React.Component<
     return (
       <div>
         {productTable}
-        <Link to="/checkout">Checkout</Link>
+        <Link to="/checkout">Go To Checkout</Link>
       </div>
     );
   }
