@@ -37,7 +37,9 @@ class Checkout extends React.Component<CheckoutProps, CheckoutState> {
       headers: { "Content-Type": "application/json" }
     }).then(response => {
       if (response.ok) {
-        alert("Your checkout was made and you'll be redirected to the start-page.");
+        alert(
+          "Your checkout was made and you'll be redirected to the start-page."
+        );
         this.setState({ checkoutIsFinished: true });
         this.props.onSuccessfulCheckout();
       } else {

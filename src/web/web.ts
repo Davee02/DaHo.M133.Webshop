@@ -19,7 +19,6 @@ app.use(
 app.use(express.json());
 app.use("/assets", express.static(path.join(__dirname, "frontend")));
 
-
 app.get("/api/product/list", (req, res) => {
   res.json(products);
 });

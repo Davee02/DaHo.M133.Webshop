@@ -51,7 +51,9 @@ class ProductDetail extends React.Component<
           <div>
             <h2>{product.productName}</h2>
             <p>{product.description}</p>
-            <p>CHF {(product.specialOffer || product.normalPrice).toFixed(2)}</p>
+            <p>
+              CHF {(product.specialOffer || product.normalPrice).toFixed(2)}
+            </p>
             <button onClick={this.handleAddToCartClick}>
               Add to shopping cart
             </button>

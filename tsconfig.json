@@ -10,10 +10,6 @@
     "outDir": "./dist",
     "sourceMap": true
   },
-  "include": [
-    "./src"
-  ],
-  "exclude": [
-    "./src/web/frontend"
-  ]
+  "include": ["./src"],
+  "exclude": ["./src/web/frontend"]
 }

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import ShoppingCartLib from "../../../lib/shoppingCart";
+import { groupBy } from "../../../lib/helper";
 import ProductRow from "./ProductRow";
 
 export interface ShoppingCartProps {
@@ -45,23 +46,6 @@ export default class ShoppingCart extends React.Component<
       });
   }
 
-  groupBy<TKey, TValue>(
-    list: Array<TValue>,
-    keyGetter: (item: TValue) => TKey
-  ) {
-    const map = new Map<TKey, TValue[]>();
-    list.forEach(item => {
-      const key = keyGetter(item);
-      const collection = map.get(key);
-      if (!collection) {
-        map.set(key, [item]);
-      } else {
-        collection.push(item);
-      }
-    });
-    return map;
-  }
-
   render() {
     if (this.state.shoppingCart.allProducts.length === 0) {
       return <h3>Your shopping cart is empty.</h3>;
@@ -71,7 +55,7 @@ export default class ShoppingCart extends React.Component<
       a.id > b.id ? 1 : -1
     );
 
-    const groupedProducts = this.groupBy(sortedProducts, product => product.id);
+    const groupedProducts = groupBy(sortedProducts, product => product.id);
     const productsRows = new Array<JSX.Element>();
     groupedProducts.forEach(products =>
       productsRows.push(
