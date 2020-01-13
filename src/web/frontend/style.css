@@ -5,7 +5,12 @@ div#root {
 header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+}
+
+.crossed-out {
+  text-decoration: line-through;
+  color: red;
 }
 
 .overview-container {

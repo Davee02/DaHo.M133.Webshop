@@ -30,7 +30,7 @@ export default class App extends React.Component<
           {product.specialOffer ? (
             <p>
               CHF {product.specialOffer.toFixed(2)}{" "}
-              <s>CHF {product.normalPrice.toFixed(2)}</s>
+              <s className="crossed-out">CHF {product.normalPrice.toFixed(2)}</s>
             </p>
           ) : (
             <p>CHF {product.normalPrice.toFixed(2)}</p>
