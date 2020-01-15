@@ -1,13 +1,8 @@
 export default class CheckoutInformation {
-  firstname: string;
-  lastname: string;
-  email: string;
-  phone: string;
-
-  constructor() {
-    this.firstname = "";
-    this.lastname = "";
-    this.email = "";
-    this.phone = "";
-  }
+  constructor(
+    public firstname: string = "",
+    public lastname: string = "",
+    public email: string = "",
+    public phone: string = ""
+  ) {}
 }

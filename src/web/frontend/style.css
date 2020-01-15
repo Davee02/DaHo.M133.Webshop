@@ -20,6 +20,10 @@ header {
 
 .overview-item {
   margin: 25px;
+  padding: 10px;
+  border-style: solid;
+  border-color: gray;
+  border-width: 1px;
 }
 
 img.overview {
@@ -106,5 +110,16 @@ table.shoppingcart button {
   table.shoppingcart button {
     margin-left: 0px;
     margin-right: 0px;
+  }
+
+  img.detail {
+    width: 100%;
+    margin-right: 0px;
+  }
+
+  div.change-amount {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }

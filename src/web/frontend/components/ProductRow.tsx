@@ -48,7 +48,7 @@ export default class ProductRow extends React.Component<
         <td>{product.productName}</td>
         <td>{<p>CHF {singlePrice.toFixed(2)}</p>}</td>
         <td>
-          <div>
+          <div className="change-amount">
             <button onClick={this.decrementProductCount}>-</button>
             {this.state.productCount}
             <button onClick={this.incrementProductCount}>+</button>
