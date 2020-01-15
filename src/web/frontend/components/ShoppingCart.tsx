@@ -52,7 +52,7 @@ export default class ShoppingCart extends React.Component<
     }
 
     const sortedProducts = this.state.shoppingCart.allProducts.sort((a, b) =>
-      a.id > b.id ? 1 : -1
+      a.id - b.id
     );
 
     const groupedProducts = groupBy(sortedProducts, product => product.id);

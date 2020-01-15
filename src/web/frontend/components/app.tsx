@@ -1,7 +1,7 @@
 import React from "react";
 import ProductOverview from "./ProductOverview";
 import Product from "../../../lib/product";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import ProductDetail from "./productDetail";
 import ShoppingCart from "./ShoppingCart";
 import Header from "./Header";
@@ -33,37 +33,48 @@ export default class App extends React.Component<AppProps, AppState> {
       });
   }
 
+  private ProductDetailPage = () => (
+    <ProductDetail
+      onCartUpdate={() => {
+        this.onCartUpdate();
+      }}
+    />
+  );
+
+  private ShoppingCartPage = () => (
+    <ShoppingCart
+      onCartUpdate={() => {
+        this.onCartUpdate();
+      }}
+    />
+  );
+
+  private CheckoutPage = () => (
+    <Checkout onSuccessfulCheckout={() => this.onCartUpdate()} />
+  );
+
+  private OverviewPage = () => (
+    <div className="overview-container">
+      {this.state.products.map(x => (
+        <ProductOverview product={x} key={x.id} />
+      ))}
+    </div>
+  );
+
+  private RedirectToRoot = () => <Redirect to="/" />;
+
   render() {
     return (
       <div>
         <Header />
-        <hr/>
+        <hr />
         <main>
           <Switch>
-            <Route path="/product/:id">
-              <ProductDetail
-                onCartUpdate={() => {
-                  this.onCartUpdate();
-                }}
-              />
-            </Route>
-            <Route path="/shoppingcart">
-              <ShoppingCart
-                onCartUpdate={() => {
-                  this.onCartUpdate();
-                }}
-              />
-            </Route>
-            <Route path="/checkout">
-              <Checkout onSuccessfulCheckout={() => this.onCartUpdate()} />
-            </Route>
-            <Route path="/" exact>
-              <div className="overview-container">
-                {this.state.products.map(x => (
-                  <ProductOverview product={x} key={x.id} />
-                ))}
-              </div>
-            </Route>
+            <Route path="/product/:id" component={this.ProductDetailPage} />
+            <Route path="/shoppingcart" component={this.ShoppingCartPage} />
+            <Route path="/checkout" component={this.CheckoutPage} />
+            <Route path="/" exact component={this.OverviewPage} />
+            <Route component={this.RedirectToRoot} />
           </Switch>
         </main>
       </div>

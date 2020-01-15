@@ -2,6 +2,7 @@ import React from "react";
 import Product from "../../../lib/product";
 import { Link } from "react-router-dom";
 import ProductImage from "./ProductImage";
+import Price from "./Price";
 
 export interface ProductOverviewProps {
   product: Product;
@@ -27,14 +28,7 @@ export default class App extends React.Component<
           <p>
             <b>{product.productName}</b>
           </p>
-          {product.specialOffer ? (
-            <p>
-              CHF {product.specialOffer.toFixed(2)}{" "}
-              <s className="crossed-out">CHF {product.normalPrice.toFixed(2)}</s>
-            </p>
-          ) : (
-            <p>CHF {product.normalPrice.toFixed(2)}</p>
-          )}
+          <Price product={product}/>
         </Link>
       </div>
     );

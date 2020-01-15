@@ -1,9 +1,9 @@
-import * as web from "./web";
+import * as server from "./web/server";
 
 const port: number = 8080;
 
 async function main() {
-  await web.start(port);
+  await server.start(port);
   console.log(`Server started at http://localhost:${port}`);
 }
 
