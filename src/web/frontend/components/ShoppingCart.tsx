@@ -48,11 +48,16 @@ export default class ShoppingCart extends React.Component<
 
   render() {
     if (this.state.shoppingCart.allProducts.length === 0) {
-      return <h3>Your shopping cart is empty.</h3>;
+      return (
+        <h3>
+          Your shopping cart is empty. You can add products{" "}
+          <Link to="/">here</Link>
+        </h3>
+      );
     }
 
-    const sortedProducts = this.state.shoppingCart.allProducts.sort((a, b) =>
-      a.id - b.id
+    const sortedProducts = this.state.shoppingCart.allProducts.sort(
+      (a, b) => a.id - b.id
     );
 
     const groupedProducts = groupBy(sortedProducts, product => product.id);
@@ -93,7 +98,9 @@ export default class ShoppingCart extends React.Component<
     return (
       <div>
         {productTable}
-        <Link to="/checkout">Go To Checkout</Link>
+        <Link to="/checkout">
+          <button>Go To Checkout</button>
+        </Link>
       </div>
     );
   }

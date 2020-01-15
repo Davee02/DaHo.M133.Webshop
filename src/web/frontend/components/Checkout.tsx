@@ -1,5 +1,6 @@
 import * as React from "react";
 import { withRouter, RouteComponentProps, Redirect } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 export interface CheckoutProps extends RouteComponentProps {
   onSuccessfulCheckout: () => void;
@@ -28,6 +29,32 @@ class Checkout extends React.Component<CheckoutProps, CheckoutState> {
     }));
   }
 
+  private showErrorToast() {
+    toast.error(
+      "There was an error processing your checkout. Maybe you used invalid data. Please retry it.",
+      {
+        position: "top-center",
+        pauseOnHover: false,
+        pauseOnFocusLoss: false
+      }
+    );
+  }
+
+  private showSuccessToast() {
+    toast.success(
+      "Your checkout was made and you'll be redirected to the start-page.",
+      {
+        position: "top-center",
+        pauseOnHover: false,
+        pauseOnFocusLoss: false,
+        onClose: () => {
+          this.setState({ checkoutIsFinished: true });
+          this.props.onSuccessfulCheckout();
+        }
+      }
+    );
+  }
+
   handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -37,15 +64,9 @@ class Checkout extends React.Component<CheckoutProps, CheckoutState> {
       headers: { "Content-Type": "application/json" }
     }).then(response => {
       if (response.ok) {
-        alert(
-          "Your checkout was made and you'll be redirected to the start-page."
-        );
-        this.setState({ checkoutIsFinished: true });
-        this.props.onSuccessfulCheckout();
+        this.showSuccessToast();
       } else {
-        alert(
-          "There was an error while processing your checkout. Maybe you used invalid data. Please retry it."
-        );
+        this.showErrorToast();
       }
     });
   }
